@@ -26,8 +26,7 @@
     body {
     margin-top: 0;
         height: 100%; overflow: hidden;
-        background-size: cover;
-        background-repeat: no-repeat;
+        
        background-image: URL("Background.png")
     }
       .transparent {
@@ -45,6 +44,7 @@
 <body>
 
 <div class="transparent"><div id="day" class="day"></div>
+    <div class="day" id="battery"></div>
   <div class="clock" id="clock"></div></div>
   <script>
     function updateTime() {
@@ -62,8 +62,14 @@
     hours = hours ? hours : 12;
     minutes = minutes < 10 ? '0' + minutes : minutes;
     document.getElementById("day").textContent = dayNames[day] + ", " + months[pstTime.getMonth()] + " " + dayformat[pstTime.getDate()] + ", " + pstTime.getFullYear();
+               navigator.getBattery()
+  .then(function(battery) {
     document.getElementById("clock").textContent = `${hours}:${minutes} ${ampm}`;
-  }
+    document.getElementById("battery").textContent = `${Math.round(battery.level * 100)}% charged`
+  })
+};
+    
+ 
   setInterval(updateTime, 1000);
   updateTime();
   </script>
