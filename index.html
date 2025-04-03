@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#98989a">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#98989a">
+  <title> ⃝</title>
+  <style>
+    .clock {
+      font-size: 48px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 20px;
+        
+             color: white;
+
+    }
+    .day {
+        text-align: center;
+              color: white;
+        
+        
+    }
+    body {
+    margin-top: 0;
+        height: 100%; overflow: hidden;
+        
+       background-image: URL("Background.png")
+    }
+      .transparent {
+          
+         background-color: rgba(0,0,0, 0.3);
+          border-radius: 12px;
+          width: 400px;
+          margin-left: auto;
+          margin-right: auto;
+          
+      }
+      
+  </style>
+</head>
+<body>
+
+<div class="transparent"><div id="day" class="day"></div>
+  <div class="clock" id="clock"></div></div>
+  <script>
+    function updateTime() {
+    const now = new Date();
+    const pstTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
+    let dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let dayformat = ["0th", "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th", "20th", "21st", "22nd", "23rd", "24th", "25th", "26th", "27th", "28th", "29th", "30th", "31st"];
+    let hours = pstTime.getHours();
+    let minutes = pstTime.getMinutes();
+    let day = pstTime.getDay();
+    let dayName = dayNames[day];
+    let ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    document.getElementById("day").textContent = dayNames[day] + ", " + months[pstTime.getMonth()] + " " + dayformat[pstTime.getDate()] + ", " + pstTime.getFullYear();
+    document.getElementById("clock").textContent = `${hours}:${minutes} ${ampm}`;
+  }
+  setInterval(updateTime, 1000);
+  updateTime();
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js').then(
+          (registration) => {
+            console.log('Service Worker registered with scope:', registration.scope);
+          },
+          (error) => {
+            console.log('Service Worker registration failed:', error);
+          }
+        );
+      });
+    }
+  </script>
+</body>
+</html>
