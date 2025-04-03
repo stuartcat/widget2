@@ -8,8 +8,8 @@
     "theme_color": "#98989a",
     "icons": [
       { 
-        "src": "icon128.png"
-        "sizes": "128x128"
+        "src": "icon128.png",
+        "sizes": "128x128",
         "type": "image/png"
       },
       {
