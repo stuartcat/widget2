@@ -7,6 +7,10 @@
     "background_color": "#ffffff",
     "theme_color": "#98989a",
     "icons": [
+      { 
+          "src": "icon1922.png",
+          "sizes": "192x192",
+          "type": "images/png"
       {
         "src": "icon512.png",
         "sizes": "512x512",
